@@ -1,0 +1,74 @@
+{
+  "requirements": [
+    {
+      "identifier": "desafio1",
+      "description": "1 - Ajude a Trybe a escolher um filme para a próxima noite! Baseado em uma pesquisa, decidimos que os filmes em potencial devem atender alguns critérios.",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio2",
+      "description": "2 - Utilizando o mesmo pipeline anterior, retorne apenas os campos `title`, `rated`, `imdb.rating`, `imdb.votes` e `year`, modificando seus nomes para `titulo`, `avaliado`, `notaIMDB`, `votosIMDB` e `ano`.",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio3",
+      "description": "3 - Agora que você tem os campos essenciais, retorne esses filmes ordenados por ano e nota IMDB de forma decrescente e por ordem alfabética.",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio4",
+      "description": "4 - Crie um pipeline que retorne apenas os filmes com o título composto apenas de uma palavra.",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio5",
+      "description": "5 - Qual o título do vigésimo quinto filme do resultado dessa agregação?",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio6",
+      "description": "6 - Calcule o maior valor, menor valor, média e o desvio padrão das avaliações (campo imdb.rating).",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio7",
+      "description": "7 - Traga o nome do ator ou atriz, número de filmes em que participou e a média do imdb desses filmes com apenas uma casa decimal.",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio8",
+      "description": "8 - Liste todas as parcerias da coleção air_alliances, que voam rotas com um Boing 747 ou um Airbus A380.",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio9",
+      "description": "9 - A partir da coleção trips, determine o menor e o maior ano de nascimento.",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio10",
+      "description": "10 - Encontre a média de viagens por tipo de usuário. Exiba o valor em horas com apenas duas casas decimais.",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio11",
+      "description": "11 - Determine qual o dia da semana com maior número de viagens iniciadas.",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio12",
+      "description": "12 - Agora que você já sabe o dia com mais viagens, determine qual estação tem o maior número de viagens nesse dia da semana.",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio13",
+      "description": "13 - Determine a duração média das viagens iniciadas no dia 10/03/2016, em minutos.",
+      "bonus": false
+    },
+    {
+      "identifier": "desafio14",
+      "description": "14 - Baseado na duração média das viagens, determine quais são as 5 bicicletas que foram mais utilizadas.",
+      "bonus": false
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "root": true,
+  "env": {
+    "mongo": true,
+    "browser": true,
+    "commonjs": true,
+    "es2020": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": "airbnb-base",
+  "parserOptions": {
+    "ecmaVersion": 11
+  },
+  "plugins": [
+    "sonarjs"
+  ],
+  "rules": {
+    "max-params": ["error", 4],
+    "max-lines": ["error", 250],
+    "sonarjs/cognitive-complexity": "error",
+    "max-lines-per-function": ["error", 25],
+    "max-depth": ["error", 4],
+    "sonarjs/no-identical-functions": "error",
+    "no-console": "off",
+    "no-alert": "off",
+    "arrow-parens": [
+      "error",
+      "always"
+    ],
+    "jsx-a11y/label-has-associated-control": 0,
+    "quotes": [2, "double"],
+    "complexity": "error",
+    "implicit-arrow-linebreak": "off",
+    "consistent-return": "off",
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "object-curly-newline": "off",
+    "no-undef": "off"
+  }
+}
