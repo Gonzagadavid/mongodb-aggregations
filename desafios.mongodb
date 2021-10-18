@@ -162,6 +162,67 @@ db.movies.aggregate([
 // O resultado da sua query deve ter exatamente o seguinte formato (incluindo a ordem dos campos):
 
 // { "title" : <nome_do_filme> }
+
+use('aggregations');
+db.movies.aggregate([
+  {
+    $match: {
+      countries: 'USA',
+      'tomatoes.viewer.rating': { $gte: 3 },
+      cast: {
+        $in:  [
+                'Sandra Bullock',
+                'Tom Hanks',
+                'Julia Roberts',
+                'Kevin Spacey',
+                'George Clooney'
+              ]
+      }
+    }
+  },
+  {
+    $addFields: {
+      num_favs: {
+        $size: {
+          $filter: {
+            input: '$cast',
+            as: 'actor',
+            cond: { $in: [
+              '$$actor',
+              [
+                'Sandra Bullock',
+                'Tom Hanks',
+                'Julia Roberts',
+                'Kevin Spacey',
+                'George Clooney'
+              ]
+            ]}
+          }
+        }
+      }
+    }
+  },
+  {
+    $sort: {
+      num_favs: -1,
+      'tomatoes.viewer.rating': -1,
+      title: -1,
+    }
+  },
+  {
+    $skip: 24
+  },
+  {
+    $limit: 1
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1
+    }
+  }
+])
+
 // Desafio 6
 // Vamos explorar mais operadores aritméticos!
 
