@@ -329,15 +329,6 @@ db.movies.aggregate([
 // { "_id" : <nome_da_alianca>, "totalRotas" : <total_de_rotas> }
 
 use('aggregations');
-db.air_airlines.find();
-
-use('aggregations');
-db.air_alliances.find();
-
-use('aggregations');
-db.air_routes.find();
-
-use('aggregations');
 db.air_alliances.aggregate([
   {
     $unwind: '$airlines'
@@ -374,7 +365,7 @@ db.air_alliances.aggregate([
   {
     $limit: 1
   }
-])
+]);
 
 // Desafio 9
 // A partir da coleção trips, determine o menor e o maior ano de nascimento.
@@ -387,6 +378,41 @@ db.air_alliances.aggregate([
 // O resultado da sua query deve ter exatamente o seguinte formato (incluindo a ordem dos campos):
 
 // { "maiorAnoNascimento" : <ano>, "menorAnoNascimento" : <ano> }
+
+use('aggregations');
+db.trips.find().count();
+
+use('aggregations');
+db.trips.aggregate([
+  {
+    $match: {
+       birthYear: { $exists: 1, $ne: '' }
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      maiorAnoNascimento: { 
+        $max: { 
+          $toInt: '$birthYear' 
+        } 
+      },
+      menorAnoNascimento: { 
+        $min: { 
+          $toInt: '$birthYear' 
+        } 
+      },
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      maiorAnoNascimento: 1,
+      menorAnoNascimento: 1,
+    }
+  }
+]);
+
 // Desafio 10
 // Encontre a duração média de viagens por tipo de usuário.
 // Exiba o valor em horas com apenas duas casas decimais
