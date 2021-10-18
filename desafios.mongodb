@@ -380,9 +380,6 @@ db.air_alliances.aggregate([
 // { "maiorAnoNascimento" : <ano>, "menorAnoNascimento" : <ano> }
 
 use('aggregations');
-db.trips.find().count();
-
-use('aggregations');
 db.trips.aggregate([
   {
     $match: {
@@ -422,7 +419,42 @@ db.trips.aggregate([
 // O resultado da sua query deve ter exatamente o seguinte formato (incluindo a ordem dos campos):
 
 // { "tipo" : <tipo>, "duracaoMedia" : <duracaoMedia> }
-// // ...
+
+
+use('aggregations');
+db.trips.find();
+
+use('aggregations');
+db.trips.aggregate([
+  {
+    $group: {
+      _id: '$usertype',
+      duracaoMedia: {
+        $avg: {
+          $subtract: ['$stopTime', '$startTime']
+        }
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      tipo: '$_id',
+      duracaoMedia: { 
+        $round: [
+          { $divide: ['$duracaoMedia',  3.6e+6] },
+          2
+        ]
+      }
+    }
+  },
+  {
+    $sort: {
+      duracaoMedia: 1
+    }
+  }
+]);
+
 // Desafio 11
 // Determine qual o dia da semana com maior número de viagens iniciadas.
 // Dica: Utilize o operador $dayOfWeek para extrair o dia da semana como um número de uma data.
