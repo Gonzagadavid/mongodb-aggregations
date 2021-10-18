@@ -47,7 +47,29 @@ db.movies.aggregate([
 // O resultado da sua query deve ter exatamente o seguinte formato (incluindo a ordem dos campos):
 
 // { "titulo" : "A Streetcar Named Desire", "avaliado" : "PG", "notaIMDB" : 8.1, "votosIMDB" : 72364, "ano" : 1951 }
-// // Demais documentos
+
+use('aggregations');
+db.movies.aggregate([
+  {
+    $match: {
+      'imdb.rating': { $gte: 7 },
+      genres: { $nin: ['Crime', 'Horror'] },
+      rated: { $in: ['PG', 'G'] },
+      languages: { $all: ['English', 'Spanish'] },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      titulo: '$title',
+      avaliado: '$rated',
+      notaIMDB: '$imdb.rating',
+      votosIMDB: '$imdb.votes',
+      ano: '$year',
+    },
+  },
+]);
+
 // Desafio 3
 // Agora que você tem os campos essenciais, aplique mais um estágio na pipeline do desafio anterior que atenda a seguinte demanda:
 
