@@ -30,7 +30,7 @@ print_results() {
 }
 
 run_evaluate() {
-  scripts/resetdb.sh "$DB_RESTORE_DIR"
+ # scripts/resetdb.sh "$DB_RESTORE_DIR"
   # Build path to results dir
   resultPath="$RESULTS_DIR/$chName"
   touch "$resultPath"
@@ -67,4 +67,4 @@ else
   run_evaluate
 fi
 
-scripts/resetdb.sh "$DB_RESTORE_DIR"
+# scripts/resetdb.sh "$DB_RESTORE_DIR"
