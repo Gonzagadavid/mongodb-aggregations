@@ -502,9 +502,6 @@ db.trips.aggregate([
 // { "nomeEstacao" : <nome_da_estacao>, "total" : <total_de_viagens> }
 
 use('aggregations');
-db.trips.find();
-
-use('aggregations');
 db.trips.aggregate([
   {
     $project: {
@@ -591,6 +588,48 @@ db.trips.aggregate([
 // O resultado da sua query deve ter exatamente o seguinte formato (incluindo a ordem dos campos):
 
 // { "duracaoMediaEmMinutos" : <duracao_media_em_minutos> }
+
+use('aggregations');
+db.trips.find();
+
+use('aggregations');
+db.trips.aggregate([
+  {
+    $match: {
+      startTime: { 
+        $gte: ISODate('2016-03-10T00:00:00'),
+        $lte: ISODate('2016-03-10T23:59:59')
+      }
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      duracaoMedia: { 
+        $avg: {
+          $subtract: [
+            '$stopTime',
+            '$startTime',
+          ]
+        } 
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      duracaoMediaEmMinutos: {
+        $ceil: {
+          $divide: [
+            '$duracaoMedia',
+            60000
+          ]
+        }
+      }
+    }
+  }
+]);
+
 // Desafio 14
 // Baseado na duração média das viagens, determine quais são as 5 bicicletas que foram mais utilizadas.
 // Exiba o resultado em minutos arredondados para cima e em ordem decrescente.
