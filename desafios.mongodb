@@ -420,10 +420,6 @@ db.trips.aggregate([
 
 // { "tipo" : <tipo>, "duracaoMedia" : <duracaoMedia> }
 
-
-use('aggregations');
-db.trips.find();
-
 use('aggregations');
 db.trips.aggregate([
   {
@@ -462,6 +458,40 @@ db.trips.aggregate([
 // O resultado da sua query deve ter exatamente o seguinte formato (incluindo a ordem dos campos):
 
 // { "diaDaSemana" : <dia_da_semana>, "total" : <total_de_viagens> }
+
+use('aggregations');
+db.trips.find();
+
+use('aggregations');
+db.trips.aggregate([
+  {
+    $project: {
+      diaDaSemana: { $dayOfWeek: '$startTime' },
+    }
+  },
+  {
+    $group: {
+      _id: '$diaDaSemana',
+      total: { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      total: -1
+    }
+  },
+  {
+    $limit: 1
+  },
+  {
+    $project: {
+      _id: 0,
+      diaDaSemana: '$_id',
+      total: "$total",
+    }
+  }
+]);
+
 // Desafio 12
 // Usando a pipeline anterior que retorna o dia com mais viagens, determine qual estação tem o maior número de viagens nesse dia da semana.
 // Exiba apenas o nome da estação e o total de viagens.
